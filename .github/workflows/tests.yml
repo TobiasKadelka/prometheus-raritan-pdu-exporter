@@ -21,6 +21,10 @@ jobs:
         python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
-        python3 -m pip install --upgrade setuptools pip tox
+        pip install uv
+        uv pip install --system setuptools pip tox
+    - name: linting
+      run: |
+        uvx ruff check
     - name: Test with tox
       run: tox -e ${{ matrix.toxenv }}
